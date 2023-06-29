@@ -76,10 +76,12 @@ if (import.meta.env.PROD) {
     .whenReady()
     .then(() => import('electron-updater'))
     .then(module => {
+      console.log({module});
       const autoUpdater =
         module.autoUpdater ||
         // @ts-expect-error Hotfix for https://github.com/electron-userland/electron-builder/issues/7338
         (module.default.autoUpdater as (typeof module)['autoUpdater']);
+      console.log({autoUpdater});
       return autoUpdater.checkForUpdatesAndNotify();
     })
     .catch(e => console.error('Failed check and install updates:', e));
