@@ -12,7 +12,6 @@ module.exports = async function () {
   const {getVersion} = await import('./version/getVersion.mjs');
 
   return {
-    asar: false,
     directories: {
       output: 'dist',
       buildResources: 'buildResources',
