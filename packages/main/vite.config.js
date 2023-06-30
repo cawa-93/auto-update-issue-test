@@ -1,9 +1,9 @@
-import {node} from '../../.electron-vendors.cache.json';
 import {join} from 'node:path';
 import {injectAppVersion} from '../../version/inject-app-version-plugin.mjs';
 
 const PACKAGE_ROOT = __dirname;
 const PROJECT_ROOT = join(PACKAGE_ROOT, '../..');
+
 
 /**
  * @type {import('vite').UserConfig}
@@ -21,12 +21,12 @@ const config = {
   build: {
     ssr: true,
     sourcemap: 'inline',
-    target: `node${node}`,
+    target: 'node18',
     outDir: 'dist',
     assetsDir: '.',
     minify: process.env.MODE !== 'development',
     lib: {
-      entry: 'src/index.ts',
+      entry: 'src/index.js',
       formats: ['cjs'],
     },
     rollupOptions: {

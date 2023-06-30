@@ -116,13 +116,13 @@ flowchart TB;
 packages/preload <-. IPC Messages .-> packages/main
 
     subgraph packages/main["packages/main (Shared beatween all windows)"]
-    M[index.ts] --> EM[Electron Main Process Modules]
+    M[index.js] --> EM[Electron Main Process Modules]
     M --> N2[Node.js API]
     end
 
 subgraph Window["Browser Window"]
     subgraph packages/preload["packages/preload (Works in isolated context)"]
-    P[index.ts] --> N[Node.js API]
+    P[index.js] --> N[Node.js API]
     P --> ED[External dependencies]
     P --> ER[Electron Renderer Process Modules]
     end
@@ -178,7 +178,7 @@ this template uses the [unplugin-auto-expose](https://github.com/cawa-93/unplugi
 to export the method from the preload. The `exposeInMainWorld` will be called automatically.
 
 ```ts
-// preload/index.ts
+// preload/index.js
 import { readFile } from 'node:fs/promises';
 
 // Encapsulate types if you use typescript
@@ -187,7 +187,7 @@ interface UserData {
 }
 
 // Encapsulate all node.js api
-// Everything you exported from preload/index.ts may be called in renderer
+// Everything you exported from preload/index.js may be called in renderer
 export function getUserData(): Promise<UserData> {
   return readFile('/path/to/file/in/user/filesystem.json', {encoding:'utf8'}).then(JSON.parse);
 }
